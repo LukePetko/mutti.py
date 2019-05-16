@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+from discord.utils import get
+
 import youtube_dl
 
 mutti = commands.Bot(command_prefix = '!')
@@ -22,11 +24,26 @@ async def ping(ctx):
 
 @mutti.command()
 async def pod(ctx):
+    '''
     server = ctx.message.guild
+
 
     voice_mutti = await ctx.message.author.voice.channel.connect()
 
-    player = await voice_mutti.create_ytdl_player('https://www.youtube.com/watch?v=MbhXIddT2YY')
+    player = await ctx.message.author.voice.channel.create_ytdl_player('https://www.youtube.com/watch?v=MbhXIddT2YY')
     player.start()
+
+    '''
+
+    url = 'https://www.youtube.com/watch?v=MbhXIddT2YY'
+
+    author = ctx.message.author
+    voice_channel = author.voice.channel
+    vc = await mutti.join_voice_channel(voice_channel)
+
+    player = await vc.create_ytdl_player(url)
+    player.start()
+    
+
 
 mutti.run('NTc4NTI2OTgzOTE1NDM4MDgx.XN05Zw.UznGNE2Wnoh9Gz4vJY5PEk9qcT0')
