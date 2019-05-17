@@ -3,3 +3,4 @@ discord.py[voice]
 youtube-dl
 google-api-python-client
 asyncio
+PyNaCl
